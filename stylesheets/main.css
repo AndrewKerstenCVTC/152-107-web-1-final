@@ -1,0 +1,28 @@
+main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+main > img {
+    width: 20vh;
+    height: 20vh;
+}
+
+main > h1 {
+    font-weight: normal;
+    font-size: 8vh;
+    margin: 2vh;
+}
+
+main > p {
+    margin: 0;
+    margin-bottom: 1vh;
+    font-size: 1.5em;
+}
+
+main a {
+    color: var(--color-primary);
+}
