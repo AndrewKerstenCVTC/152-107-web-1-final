@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Andrew Kersten</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet"> 
+  <link rel="stylesheet" type="text/css" href="stylesheets/shared.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+  <script id="shader_fullquad_v" type="x-shader/x-vertex">
+    attribute vec4 vertex;
+    varying highp vec2 texcoord;
+    void main() {
+      texcoord = vertex.zw;
+      gl_Position = vec4(vertex.xy, 0.0, 1.0);
+    }
+  </script>
+  <script id="shader_fullquad_f" type="x-shader/x-fragment">
+    uniform sampler2D texture0;
+    varying highp vec2 texcoord;
+
+    void main() {
+      gl_FragColor = texture2D(texture0, vec2(texcoord.x, texcoord.y));
+    }
+  </script>
+</head>
+<body>
+  <nav>
+    <div id="nav-container">
+      <ul id="nav-pages">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Resume</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <ul id="nav-social">
+          <li><a href="mailto:akersten5@student.cvtc.edu"><i class="far fa-envelope"></i></a></li>
+          <li><a href="https://github.com/andrewkersten"><i class="fab fa-github"></i></a></li>
+          <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+      </ul>
+    </div>
+  </nav>
+  <main id="emulator">
+    <h1>Emulator</h1>
+    <p>Embedded down below is my emulator for the DCPU-16.  The DCPU-16 is a fictional 16 bit CPU designed by <a href="https://en.wikipedia.org/wiki/Markus_Persson">Markus (Notch) Persson</a> for the game <a href="https://en.wikipedia.org/wiki/0x10c">0x10<sup>c</sup></a>.  Work on the game has been discontinued, but there was a lot of interest in this virtual chip when the game was originally announced.</p>
+    <p>The emulator is powered by my own C library, <a href="https://github.com/andrewkersten/LibDCPU16">LibDCPU16</a>, which has been compiled into a WebAssembly module to run in the browser.  The LEM1802 display is rendered to a WebGL canvas.  Try running the sample program below!</p>
+    <div class="wrapper">
+      <canvas id="canvas" width="384" height="288">A WebGL capable browser is required to view the display.</canvas>
+      <ul id="emulator-controls">
+          <li id="emulator-control-start" onclick="emulator.handleStartStop();">Start</li>
+          <li id="emulator-control-reset" onclick="emulator.handleReset();">Reset</li>
+      </ul>
+      <label id="speedLabel">Emulation Speed:</label>
+      <input id="emulator-control-speed" type="range" min="1" max="100" value="10" oninput="emulator.handleSpeedChange(this.value);">
+      <label>Registers:</label>
+      <p>
+          <code id="RA" class="registerUnchanged">RA: 0x0000</code>
+          <code id="RB" class="registerUnchanged">RB: 0x0000</code>
+          <code id="RC" class="registerUnchanged">RC: 0x0000</code>
+          <code id="RX" class="registerUnchanged">RX: 0x0000</code>
+          <code id="RY" class="registerUnchanged">RY: 0x0000</code>
+          <code id="RZ" class="registerUnchanged">RZ: 0x0000</code>
+      </p>
+      <p>
+          <code id="RI" class="registerUnchanged">RI: 0x0000</code>
+          <code id="RJ" class="registerUnchanged">RJ: 0x0000</code>
+          <code id="PC" class="registerUnchanged">PC: 0x0000</code>
+          <code id="SP" class="registerUnchanged">SP: 0x0000</code>
+          <code id="EX" class="registerUnchanged">EX: 0x0000</code>
+          <code id="IA" class="registerUnchanged">IA: 0x0000</code>
+      </p>
+      <label>Sample Source Code:</label>
+      <pre><code id="sourceView"></code></pre>
+    </div>
+  </main>
+  <footer></footer>
+  <script src="wasm.js"></script>
+  <script>
+		if (window.WebAssembly) {
+			wasm.createInstance("demu.wasm").then(function() {
+				emulator.initialize();
+			});
+    }
+  </script>
+</body>
+</html>

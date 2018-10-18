@@ -4,14 +4,16 @@
     --color-lightest: #e8f5e9;
     --color-text: #212121;
     --color-text-light: #757575;
+    --color-container-background: #f5f5f5;
+    --color-container-border: #d0d0d0;
+    --color-container-shadow: #757575;
     --page-border: 0.5em solid var(--color-primary);
+    --max-width: 1024px;
 }
 
 body {
     display: grid;
     font-family: 'Raleway', sans-serif;
-    font-variant-numeric: lining-nums;
-    font-feature-settings: "lnum" 1;
     grid-template-rows: auto 1fr auto;
     margin: 0;
     min-height: 100vh;
@@ -19,19 +21,28 @@ body {
 }
 
 nav {
-    background-color: #f5f5f5;
-    border-bottom: 1px solid #d0d0d0;
+    background-color: var(--color-container-background);
+    border-bottom: 1px solid var(--color-container-border);
+    box-shadow: 0px 1px 3px var(--color-container-shadow);
     border-top: var(--page-border);
-    box-shadow: 0px 1px 3px var(--color-text-light);
 }
 
 #nav-container {
     width: 100%;
-    max-width: 1024px;
+    max-width: var(--max-width);
     margin-left: auto;
     margin-right: auto;
-    display: flex;
-    justify-content: space-between;
+    overflow: hidden;
+    /*display: flex;
+    justify-content: space-between;*/
+}
+
+#nav-pages {
+    float: left;
+}
+
+#nav-social {
+    float: right;
 }
 
 nav ul {
@@ -40,10 +51,52 @@ nav ul {
     padding: 0;
 }
 
+@media only screen and (max-width: 37.5em) {
+    #nav-pages:before {
+        color: var(--color-text);
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        width: 1em;
+        height: 1em;
+        content: "\f0c9";
+    }
+
+    #nav-pages > li {
+        display: none;
+    }
+
+    #nav-pages {
+        position: relative;
+    }
+
+    #nav-pages:hover {
+        position: absolute;
+        background-color: var(--color-container-background);
+        border: 1px solid var(--color-container-border);
+        padding: 1em;
+    }
+
+    #nav-pages:hover li {
+        display: block;
+        margin-bottom: 0.5em;
+    }
+
+    #nav-pages:hover:before {
+        display: none;
+    }
+}
+
 nav li {
     display: inline-block;
-    margin-right: 1em;
     font-size: 1.1em;
+}
+
+#nav-pages > li {
+    margin-right: 1em;
+}
+
+#nav-social > li {
+    margin-left: 1em;
 }
 
 nav a {
@@ -56,18 +109,29 @@ nav a:hover {
 
 footer {
     border-bottom: var(--page-border);
-    text-align: center;
     margin-top: 4em;
 }
 
 a {
-    color: var(--color-text);
+    color: var(--color-primary);
     text-decoration: none;
 }
 
 a:hover {
-    color: var(--color-primary);
     text-decoration: underline;
+}
+
+main {
+    width: 100%;
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main h1 {
+    font-size: 5em;
+    font-weight: normal;
+    text-align: center;
 }
 
 /* 
@@ -112,24 +176,145 @@ main#landing a {
 ----------------------------------------------------------------
 */
 
+main#portfolio .container {
+    background-color: var(--color-container-background);
+    border: 1px solid var(--color-container-border);
+    box-shadow: 0px 1px 3px var(--color-container-shadow);
+    padding: 1em;
+    overflow: hidden;
+    margin-bottom: 3em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+main#portfolio h2 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+main#portfolio img.left {
+    float: left;
+    margin-right: 2em;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+
+main#portfolio img.right {
+    float: right;
+    margin-left: 2em;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+
+main#portfolio div.center {
+    text-align: center;
+}
+
+main#portfolio div.center > img {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+main#portfolio p {
+    font-size: 1.25em;
+    line-height: 1.5em;
+}
+
+main#portfolio #btn-demo {
+    padding: 0.5em;
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-text);
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+main#portfolio #btn-demo:hover {
+    background-color: var(--color-light);
+    text-decoration: none;
+}
+
+main#portfolio li {
+    font-size: 1.25em;
+    line-height: 1.5em;
+}
+
+/* 
+----------------------------------------------------------------
+    Emulator Specific Styles
+----------------------------------------------------------------
+*/
+
+main#emulator p {
+    font-size: 1.25em;
+    line-height: 1.5em;
+}
+
+main#emulator div.wrapper {
+    text-align: center;
+}
+
+main#emulator canvas {
+    margin-top: 2em;
+    background-color: #000000;
+}
+
+main#emulator #emulator-controls {
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+main#emulator ul {
+    list-style: none;
+    padding: 0;
+}
+
+main#emulator li {
+    display: inline-block;
+    background-color: var(--color-primary);
+    cursor: pointer;
+    font-size: 1.25em;
+    width: 5em;
+    padding: 0.25em;
+    text-align: center;
+    border: 1px solid var(--color-text);
+}
+
+main#emulator li:hover {
+    background-color: var(--color-light);
+}
+
+main#emulator label {
+    display: block;
+    font-weight: bold;
+    margin-top: 3em;
+    margin-bottom: 1em;
+}
+
+main#emulator p > code {
+    margin: 0.5em;
+    padding: 0.25em;
+    background-color: var(--color-container-background);
+    border: 1px solid var(--color-container-border);
+}
+
+main#emulator pre {
+    text-align: left;
+    width: 100%;
+    background-color: var(--color-container-background);
+    border: 1px solid var(--color-container-border);
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: scroll;
+    padding: 1em;
+}
+
 /* 
 ----------------------------------------------------------------
     Blog Specific Styles
 ----------------------------------------------------------------
 */
-
-main#blog {
-    width: 100%;
-    max-width: 1024px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-main#blog > h1 {
-    font-size: 8vh;
-    font-weight: normal;
-    text-align: center;
-}
 
 main#blog article {
     padding: 1em;
@@ -164,7 +349,7 @@ main#blog .tags {
 }
 
 main#blog .tags:before {
-    color: #4caf50;
+    color: var(--color-text);
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     width: 1em;
@@ -203,9 +388,9 @@ main#blog .tag {
 
 
 #contact > .wrapper {
-    background-color: #f5f5f5;
-    border: 1px solid #d0d0d0;
-    box-shadow: 0px 1px 3px var(--color-text-light);
+    background-color: var(--color-container-background);
+    border: 1px solid var(--color-container-border);
+    box-shadow: 0px 1px 3px var(--color-container-shadow);
     margin-left: 0.5em;
     margin-right: 0.5em;
     padding-left: 2em;

@@ -11,22 +11,48 @@
 <body>
   <nav>
     <div id="nav-container">
-      <ul>
+      <ul id="nav-pages">
         <li><a href="index.html">Home</a></li>
         <li><a href="#">Resume</a></li>
         <li><a href="portfolio.html">Portfolio</a></li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
-      <ul>
-          <li><a href="#"><i class="far fa-envelope"></i></a></li>
-          <li><a href="#"><i class="fab fa-github"></i></a></li>
+      <ul id="nav-social">
+          <li><a href="mailto:akersten5@student.cvtc.edu"><i class="far fa-envelope"></i></a></li>
+          <li><a href="https://github.com/andrewkersten"><i class="fab fa-github"></i></a></li>
           <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
       </ul>
     </div>
   </nav>
-  <main>
+  <main id="portfolio">
     <h1>Portfolio</h1>
+    <div class="container">
+      <h2>Emulator:</h2>
+      <img src="images/emulator.png" alt="emulator thumbnail" width="192" height="144" class="left">
+      <p>An interactive emulator for the DCPU-16.  The DCPU-16 is a fictional 16 bit CPU designed by <a href="https://en.wikipedia.org/wiki/Markus_Persson">Markus (Notch) Persson</a> for the game <a href="https://en.wikipedia.org/wiki/0x10c">0x10<sup>c</sup></a>.  Work on the game has been discontinued, but there was a lot of interest in this virtual chip when the game was originally announced.</p>
+      <p>The emulator is powered by my own C library, <a href="https://github.com/andrewkersten/LibDCPU16">LibDCPU16</a>, which has been compiled into a WebAssembly module to run in the browser.</p>
+      <p><a id="btn-demo" href="emulator.html">Try out the demo!</a></p>
+    </div>
+    <div class="container">
+        <h2>Voxel Editor:</h2>
+        <p>Voxel Editor was created to be intuitive for an average gamer to design voxel models in. The editor features a first person camera and intuitive controls. The editor exports models in the .vox format making it compatible with other voxel editors. Additionally the editor can procedurally generate terrain using simplex noise.</p>
+        <div class="center">
+            <img src="images/voxel2.png" alt="voxel thumbnail" width="216" height="135">
+            <img src="images/voxel4.png" alt="voxel thumbnail" width="216" height="135">
+            <img src="images/voxel1.png" alt="voxel thumbnail" width="216" height="135">
+        </div>
+      </div>
+      <div class="container">
+        <h2>Stardew Valley Patcher:</h2>
+        <p>Stardew Patcher is a C# application that modifies the MSIL bytecode of Stardew Valley to fix several bugs with the 1.03 release. I decompiled the game and used stack dumps to track down and fix several bugs I encountered.</p>
+        <ul>
+          <li>The public release accumulated over 10,000 downloads.</li>
+          <li>The modified executable is created in memory without needing to overwrite any game files.</li>
+          <li>The patch was released shortly after the game launched and several days before an official patch was available.</li>
+        </ul>
+        <p><a href="https://bitbucket.org/ghillielead/stardew-valley-patcher/downloads/">Downloads Page</a></p>
+      </div>
   </main>
   <footer></footer>
 </body>
