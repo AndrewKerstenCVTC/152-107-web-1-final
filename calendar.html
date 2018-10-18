@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Andrew Kersten</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet"> 
+  <link rel="stylesheet" type="text/css" href="stylesheets/shared.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+</head>
+<body>
+  <nav>
+    <div id="nav-container">
+      <ul id="nav-pages">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Resume</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+      </ul>
+      <ul id="nav-social">
+          <li><a href="mailto:akersten5@student.cvtc.edu"><i class="far fa-envelope"></i></a></li>
+          <li><a href="https://github.com/andrewkersten"><i class="fab fa-github"></i></a></li>
+          <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+      </ul>
+    </div>
+  </nav>
+  <main id="calendar">
+    <div id="calendar-container"></div>
+  </main>
+  <footer></footer>
+  <script src="calendar.js"></script>
+  <script>
+        let now = new Date(Date.now());
+        let currentMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+        let calendarYear = currentMonth.getFullYear();
+        let calendarMonth = currentMonth.getMonth();
+        let calendarDate = 1;
+
+        buildCalendar();
+
+        function nextMonth() {
+            currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
+            buildCalendar();
+        }
+
+        function prevMonth() {
+            currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
+            buildCalendar();
+        }
+
+        function buildCalendar() {
+            calendaryear = currentMonth.getFullYear();
+            calendarMonth = currentMonth.getMonth();
+            calendarDate = 1;
+            let calendarContainer = document.getElementById("calendar");
+            while (calendarContainer.firstChild) {
+                calendarContainer.removeChild(calendarContainer.firstChild);
+            }
+            createCalendar(calendarContainer, currentMonth.getFullYear(), currentMonth.getMonth(), function(cell, date) {
+                cell.appendChild(document.createTextNode(date.getDate()));
+            });
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("btnNext")) {
+                nextMonth();
+            } else if (event.target == document.getElementById("btnPrev")) {
+                prevMonth();
+            }
+        }
+  </script>
+</body>
+</html>
